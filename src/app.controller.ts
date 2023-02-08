@@ -8,6 +8,7 @@ import {
   Query,
   Render,
 } from '@nestjs/common';
+import { get } from 'http';
 import { addAbortSignal } from 'stream';
 import { DataSource, Entity, EntityNotFoundError } from 'typeorm';
 import Alkalmazott from './alkalmazott.entity';
@@ -36,6 +37,8 @@ export class AppController {
     alkalmazottRepo.save(alkalmazott);
     return alkalmazott;
   }
+
+  /*@Get('/alkalmazott/:Teljesnev')*/
 
   @Get('alkalmazott/search')
   async searchAlkalmazott(@Query('email') email: string) {

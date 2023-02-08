@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import { Min } from 'class-validator';
 import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -15,4 +16,14 @@ export default class Alkalmazott {
 
   @Column()
   hivatalosEmail: string;
+
+  @Column()
+  Teljesnev: string;
+
+  @Column()
+  jelszo: string;
+
+  @Column()
+  @Min(0)
+  beosztottak: number;
 }
