@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -8,6 +9,7 @@ export default class Alkalmazott {
   @Column()
   kezdoDatum: Date;
 
+  @Exclude()
   @Column('int')
   haviBer: number;
 

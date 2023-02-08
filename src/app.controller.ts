@@ -12,6 +12,7 @@ import { addAbortSignal } from 'stream';
 import { DataSource, Entity, EntityNotFoundError } from 'typeorm';
 import Alkalmazott from './alkalmazott.entity';
 import { AppService } from './app.service';
+import NewAlkalmazottDto from './NewAlklalmazott.dto';
 
 @Controller()
 export class AppController {
@@ -24,6 +25,16 @@ export class AppController {
   @Render('index')
   index() {
     return { message: 'Welcome to the homepage' };
+  }
+
+  @Post('alkalmazott')
+  async newAlkalmazott(@Body() alkalmazott: NewAlkalmazottDto) {
+    const alkalmazottRepo = this.dataSource.getRepository(Alkalmazott);
+    if (!alkalmazott.kezdoDatum) {
+      alkalmazott.kezdoDatum = new Date().toISOString();
+    }
+    alkalmazottRepo.save(alkalmazott);
+    return alkalmazott;
   }
 
   @Get('alkalmazott/search')
